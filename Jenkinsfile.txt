@@ -31,7 +31,7 @@ pipeline {
 		//Code ends for stage Compile
 
         //Code starts for stage Code Analysis
-		stage('Code Analysis') {
+		/*stage('Code Analysis') {
             steps {
 			 script {
           scannerHome = tool 'sonar-scanner'
@@ -41,7 +41,7 @@ pipeline {
 				sh "${scannerHome}/bin/sonar-scanner"
 				}
 			}
-		}
+		}*/
 		//Code ends for stage Code Analysis
 
         //Code starts for stage Unit Test
@@ -114,6 +114,16 @@ pipeline {
             }
         }
 		//Code ends for stage System Test	
+
+        //Code starts for stage BDD Test
+		stage('BDD Test') {
+            steps {
+				//Change git url below as per your forked github repository URL
+				git url: 'https://github.com/rokokorag/EMSystemTests_BDD.git'
+            	sh 'mvn -Dtest=TestRunner test'
+            }
+        }
+		//Code ends for stage BDD Test	
 	
 		// ******ALL CODE TO BE ADDED ABOVE THIS COMMENT******
     }
